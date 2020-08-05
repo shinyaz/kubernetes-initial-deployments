@@ -3,14 +3,14 @@ kind: Service
 metadata:
   labels:
     prometheus: k8s
-  name: prometheus-k8s-public
+  name: prometheus-k8s
   namespace: monitoring
 spec:
   ports:
-  - port: 9090
-    protocol: TCP
-    targetPort: 9090
+  - name: web
+    port: 9090
+    targetPort: web
   selector:
     app: prometheus
     prometheus: k8s
-  type: LoadBalancer
+  sessionAffinity: ClientIP
